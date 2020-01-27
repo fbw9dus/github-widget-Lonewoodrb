@@ -10,15 +10,20 @@ class search {
         let response = await fetch(`https://api.github.com/users/${name}/repos`);
         let data = await response.json()
         var ul = document.querySelector(".ul")
+        ul.innerHTML=""
         console.log(data)
         for (var x of data){
+            let date = new Date(x.created_at)
             var list = `
             <li>
                 ${x.name}
                 ${x.description}
-                ${x.created_at}
+                ${date.getDay()}
+                ${date.getMonth()}
+                ${date.getFullYear()}
+
             </li>`
-            ul.insertAdjacentHTML('Afterend',list)
+            ul.insertAdjacentHTML('BeforeEnd',list)
         }
         return data;
     }
@@ -30,7 +35,7 @@ class search {
 new search("button")
 
 /**
- * - nun noch beschreibung und zeit hinzufügen. 
+ * - Zeitumschreibung
  * 
  *
  *
